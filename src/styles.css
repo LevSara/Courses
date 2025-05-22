@@ -1,1 +1,69 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body, button, input, textarea, select, h1, h2, h3, h4, h5, h6, p, span, div {
+    font-family: 'Roboto', sans-serif !important;
+}
+
+/* Custom Snackbar Styles */
+.success-snackbar {
+  background: linear-gradient(45deg, #4CAF50, #8BC34A) !important;
+  color: white !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3) !important;
+}
+
+.success-snackbar .mat-simple-snackbar-action {
+  color: white !important;
+  font-weight: bold !important;
+}
+
+.error-snackbar {
+  background: linear-gradient(45deg, #F44336, #E91E63) !important;
+  color: white !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3) !important;
+}
+
+.error-snackbar .mat-simple-snackbar-action {
+  color: white !important;
+  font-weight: bold !important;
+}
+
+.info-snackbar {
+  background: linear-gradient(45deg, #2196F3, #03A9F4) !important;
+  color: white !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3) !important;
+}
+
+.info-snackbar .mat-simple-snackbar-action {
+  color: white !important;
+  font-weight: bold !important;
+}
+
+/* Dialog container styles */
+.responsive-dialog .mat-mdc-dialog-container {
+  max-width: 550px !important;
+  width: 90% !important;
+  max-height: 80vh !important;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.centered-dialog {
+  margin: auto !important;
+}
+
+/* Style for when dialog is open - makes the background content appear with reduced opacity */
+body.dialog-open::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 999;
+  pointer-events: none;
+}

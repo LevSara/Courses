@@ -1,0 +1,129 @@
+<header class="main-header">
+  <div class="logo">Online Courses for Programmers</div>
+  <div class="user-actions">
+    <!-- User profile circle that triggers dropdown menu -->
+    @if (isLoggedIn) {
+      <div class="user-circle" [matMenuTriggerFor]="userMenu">
+        {{ userName.charAt(0).toUpperCase() }}
+      </div>
+    }
+    
+    
+    <!-- User dropdown menu -->
+    <mat-menu #userMenu="matMenu">
+      <div class="menu-header">
+        <strong>{{ userName }}</strong>
+        <small>{{ userRole | titlecase }}</small>
+      </div>
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="handleEditProfile()">
+        <mat-icon>edit</mat-icon>
+        <span>Edit Profile</span>
+      </button>
+      <!-- Only show My Courses for students, not for teachers or admins -->
+      @if (userRole === 'student') {
+        <button mat-menu-item (click)="handleViewCourses()">
+          <mat-icon>school</mat-icon>
+          <span>My Courses</span>
+        </button>
+      }
+      <button mat-menu-item class="delete-btn" (click)="handleDeleteAccount()">
+        <mat-icon>delete</mat-icon>
+        <span>Delete Account</span>
+      </button>
+    </mat-menu>
+    
+    <!-- Logout button styled to match login button -->
+    @if (isLoggedIn) {
+      <button mat-raised-button color="primary" class="logout-btn" (click)="logout()">
+        Logout
+      </button>
+    }
+    
+    <!-- Login button for non-logged in users -->
+    @if (!isLoggedIn) {
+      <button mat-raised-button color="primary" routerLink="/auth">Login</button>
+    }
+  </div>
+</header>
+
+<!-- Edit Profile Modal -->
+@if (showEditProfileModal) {
+  <div class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Edit Profile</h2>
+        <button class="close-btn" (click)="closeEditProfileModal()">&times;</button>
+      </div>
+      @if (editedUser) {
+        <div class="modal-body">
+          <mat-form-field class="full-width">
+            <mat-label>Name</mat-label>
+            <input matInput [(ngModel)]="editedUser.name" name="name">
+          </mat-form-field>
+          
+          <mat-form-field class="full-width">
+            <mat-label>Email</mat-label>
+            <input matInput [(ngModel)]="editedUser.email" name="email">
+          </mat-form-field>
+          
+          <!-- Only show role field for admin users -->
+          @if (userRole === 'admin') {
+            <mat-form-field class="full-width">
+              <mat-label>Role</mat-label>
+              <input matInput [(ngModel)]="editedUser.role" name="role">
+            </mat-form-field>
+          }
+        </div>
+      }
+      <div class="modal-footer">
+        <button class="btn save-btn" (click)="saveUserChanges()">
+          <mat-icon>check</mat-icon>
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+}
+
+<!-- My Courses Modal -->
+@if (showCoursesModal) {
+  <div class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>My Courses</h2>
+        <button class="close-btn" (click)="closeCoursesModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        @if (userCourses.length === 0) {
+          <div class="no-courses">
+            You are not enrolled in any courses yet.
+          </div>
+        }
+        @if (userCourses.length > 0) {
+          <div class="courses-list">
+            <mat-card *ngFor="let course of userCourses" class="course-card">
+              <mat-card-header>
+                <mat-card-title>{{ course.title }}</mat-card-title>
+                <mat-card-subtitle>{{ course.description }}</mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-content>
+                <p><strong>Teacher:</strong> {{ course.teacherName || 'Unknown' }}</p>
+                <p><strong>Lessons:</strong> {{ course.lessons?.length || 0 }}</p>
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-button [routerLink]="['/course', course.id]">View Course</button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+        }
+      </div>
+      <div class="modal-footer">
+        <button class="btn close-btn-modal" (click)="closeCoursesModal()">
+          <mat-icon>close</mat-icon>
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+}

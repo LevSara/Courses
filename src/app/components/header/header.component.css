@@ -1,0 +1,371 @@
+/* Header background */
+.main-header {
+  background: linear-gradient(135deg, #1a0836, #2b1055);
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 800;
+  backdrop-filter: blur(10px);
+}
+
+/* High-tech style logo */
+.logo {
+  font-size: 24px;
+  font-weight: 700;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 2px;
+  background: linear-gradient(90deg, #7c4dff, #448aff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 10px rgba(124, 77, 255, 0.3);
+}
+
+/* User actions container */
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Button styling */
+button[mat-button], button[mat-raised-button] {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 25px;
+  padding: 5px 20px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+button[mat-button]:hover, button[mat-raised-button]:hover {
+  background: rgba(124, 77, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(124, 77, 255, 0.4);
+}
+
+/* Logout button - same style as login button */
+.logout-btn {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 25px !important;
+  padding: 5px 20px !important;
+  transition: all 0.3s ease !important;
+  backdrop-filter: blur(5px) !important;
+}
+
+.logout-btn:hover {
+  background: rgba(124, 77, 255, 0.3) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 15px rgba(124, 77, 255, 0.4) !important;
+}
+
+/* User circle */
+.user-circle {
+  background: linear-gradient(145deg, #7c4dff, #448aff);
+  color: white;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  box-shadow: 0 0 20px rgba(124, 77, 255, 0.5),
+             inset 0 0 15px rgba(255, 255, 255, 0.5);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  animation: pulse 2s infinite alternate;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 20px rgba(124, 77, 255, 0.5),
+               inset 0 0 15px rgba(255, 255, 255, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 30px rgba(124, 77, 255, 0.8),
+               inset 0 0 20px rgba(255, 255, 255, 0.8);
+  }
+}
+
+.user-circle:hover {
+  transform: scale(1.1) rotate(10deg);
+  box-shadow: 0 0 40px rgba(124, 77, 255, 0.9),
+             inset 0 0 25px rgba(255, 255, 255, 0.8);
+  border-color: rgba(255, 255, 255, 0.6);
+  text-shadow: 0 0 15px rgba(255, 255, 255, 1);
+}
+
+/* Modal styles */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-content {
+  background-color: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  transform: translateY(0);
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, #7c4dff, #448aff);
+  color: white;
+  border-radius: 12px 12px 0 0;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.close-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.modal-body {
+  padding: 24px;
+  background-color: #f9f9f9;
+}
+
+/* Menu styling */
+.menu-header {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #7c4dff, #448aff);
+  color: white;
+  border-radius: 4px 4px 0 0;
+}
+
+.menu-header strong {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 4px;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.menu-header small {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+}
+
+::ng-deep .mat-menu-panel {
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2) !important;
+  min-width: 200px !important;
+}
+
+::ng-deep .mat-menu-content {
+  padding: 0 !important;
+}
+
+::ng-deep .mat-menu-item {
+  font-size: 15px !important;
+  height: 48px !important;
+  line-height: 48px !important;
+  transition: background-color 0.2s ease !important;
+}
+
+::ng-deep .mat-menu-item .mat-icon {
+  margin-right: 12px !important;
+  color: #666 !important;
+}
+
+::ng-deep .mat-menu-item:hover {
+  background-color: rgba(124, 77, 255, 0.05) !important;
+}
+
+::ng-deep .mat-menu-item:hover .mat-icon {
+  color: #7c4dff !important;
+}
+
+.delete-btn {
+  color: #f44336 !important;
+}
+
+::ng-deep .delete-btn .mat-icon {
+  color: #f44336 !important;
+}
+
+.modal-footer {
+  padding: 16px 24px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  border-top: 1px solid #eee;
+  background-color: white;
+  border-radius: 0 0 12px 12px;
+}
+
+.modal-footer .btn {
+  padding: 8px 16px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 4px;
+}
+
+.cancel-btn-modal {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #666;
+}
+
+.cancel-btn-modal:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.save-btn {
+  background: linear-gradient(90deg, #7c4dff, #448aff);
+  color: white;
+  box-shadow: 0 4px 10px rgba(124, 77, 255, 0.3);
+}
+
+.save-btn:hover {
+  box-shadow: 0 6px 15px rgba(124, 77, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.close-btn-modal {
+  background-color: #f5f5f5;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+.close-btn-modal:hover {
+  background-color: #eee;
+  border-color: #ccc;
+}
+
+/* Form field styling */
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+/* Course card styling in modal */
+.course-card {
+  margin-bottom: 16px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.course-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.courses-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.no-courses {
+  text-align: center;
+  padding: 32px;
+  color: #666;
+  font-style: italic;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  margin: 16px 0;
+}
+  
+  button[mat-button], button[mat-raised-button] {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+    padding: 5px 20px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+  }
+  
+  button[mat-button]:hover, button[mat-raised-button]:hover {
+    background: rgba(124, 77, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(124, 77, 255, 0.4);
+  }
+  img {
+    width: 100%;  /* Set width to 100% */
+    height: auto; /* Maintain aspect ratio */
+  }
+  .user-actions button {
+    position: relative;
+    z-index: 10;
+    pointer-events: auto; /* If there are layers on top */
+    direction: ltr;
+  }

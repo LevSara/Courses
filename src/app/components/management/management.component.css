@@ -1,0 +1,355 @@
+.management-container {
+  min-height: 90vh;
+  padding: 2rem;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: linear-gradient(135deg, #2b1055, #7597de);
+}
+
+.management-header {
+  margin-bottom: 2rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.management-header mat-card-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin: 1rem;
+  padding: 0.5rem;
+}
+
+.course-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 1rem;
+  margin: 0.25rem;
+}
+
+.course-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.course-card mat-card-content {
+  flex-grow: 1;
+  padding: 1rem;
+}
+
+.course-card mat-card-actions {
+  display: flex;
+  justify-content: flex-start;
+  padding: 8px;
+  gap: 8px;
+}
+
+.lessons-section {
+  margin-top: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  padding-top: 1rem;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin: 1rem -1rem -1rem -1rem;
+}
+
+.mat-mdc-table {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.mat-mdc-header-cell {
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.mat-mdc-cell {
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.mat-mdc-form-field {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+button[mat-raised-button] {
+  margin-top: 1rem;
+  background: linear-gradient(135deg, #5c3bbb, #3949ab); /* Medium-tone colors */
+  color: white;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 25px;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); /* Medium shadow */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-card {
+  width: 90%;
+  max-width: 600px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  padding: 0;
+  position: relative;
+}
+
+.modal-card mat-card-header {
+  background: linear-gradient(135deg, #7c4dff, #448aff);
+  color: white;
+  padding: 1.5rem;
+  border-radius: 15px 15px 0 0;
+  position: relative;
+}
+
+.modal-card mat-card-title {
+  font-size: 1.5rem;
+  margin: 0;
+  color: white;
+}
+
+.modal-card .close-button {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  color: white;
+}
+
+.modal-card mat-card-content {
+  padding: 1rem;
+}
+
+.lesson-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.lesson-form .full-width {
+  width: 100%;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.form-actions button {
+  min-width: 120px;
+  font-size: 1.1rem;
+}
+
+button[mat-raised-button]:hover {
+  transform: scale(1.08); /* Slightly bigger on hover */
+  box-shadow: 0 0 15px rgba(108, 76, 213, 0.7); /* Glowing effect */
+  background: linear-gradient(135deg, #6c4cd5, #4a5bdc); /* Slightly lighter on hover */
+  border: 2px solid #a7b6ff; /* Bright border */
+  padding: calc(0.5rem - 2px) calc(1.5rem - 2px); /* Adjust padding to account for border */
+}
+
+.no-courses-card {
+  text-align: center;
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 500px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-card {
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: hidden;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.modal-card mat-card-header {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+}
+
+.modal-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+
+.modal-card mat-form-field {
+  width: 100%;
+}
+
+
+
+@media (max-width: 600px) {
+  .courses-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-card {
+    width: 95%;
+    margin: 1rem;
+  }
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: #555;
+}
+
+input[type="text"],
+textarea {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 1em;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.submit-button {
+  background-color: #3f51b5;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 12px 25px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #303f9f;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.5em;
+  cursor: pointer;
+  color: #777;
+}
+
+.close-button:hover {
+  color: #333;
+}
+  
+  input[type="text"],
+  textarea {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 1em;
+  }
+  
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  .submit-button {
+    background-color: #3f51b5;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 12px 25px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit-button:hover {
+    background-color: #303f9f;
+  }
+  
+/* Floating Action Button */
+.fab-add-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: linear-gradient(135deg, #5c3bbb, #3949ab); /* Medium-tone colors to match button */
+  color: white;
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); /* Medium shadow to match button */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 65px; /* Larger size */
+  height: 65px; /* Larger size */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fab-add-button mat-icon {
+  font-size: 32px; /* Larger icon */
+  font-weight: bold;
+  width: 32px;
+  height: 32px;
+}
+
+.fab-add-button:hover {
+  transform: scale(1.08); /* Slightly bigger on hover */
+  box-shadow: 0 0 15px rgba(108, 76, 213, 0.7); /* Glowing effect */
+  background: linear-gradient(135deg, #6c4cd5, #4a5bdc); /* Slightly lighter on hover */
+  border: 2px solid #a7b6ff; /* Bright border */
+}

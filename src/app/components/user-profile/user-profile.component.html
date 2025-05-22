@@ -1,0 +1,105 @@
+<!-- User Profile Button -->
+<div class="user-profile-container">
+  <button mat-button class="user-profile-button" [matMenuTriggerFor]="userMenu">
+    <mat-icon>account_circle</mat-icon>
+    @if (user) {
+      <span>{{ user.name }}</span>
+    }
+  </button>
+
+  <!-- User Menu Dropdown -->
+  <mat-menu #userMenu="matMenu" class="user-menu">
+    @if (user) {
+      <div class="menu-header">
+        <strong>{{ user.name }}</strong>
+        <small>{{ user.email }}</small>
+      </div>
+    }
+    <mat-divider></mat-divider>
+    <button mat-menu-item (click)="openEditProfile()">
+      <mat-icon>edit</mat-icon>
+      <span>Edit Profile</span>
+    </button>
+    <!-- Only show My Courses for students and teachers, not for admins -->
+    @if (!isAdmin()) {
+      <button mat-menu-item (click)="openUserCourses()">
+        <mat-icon>school</mat-icon>
+        <span>My Courses</span>
+      </button>
+    }
+    <button mat-menu-item (click)="confirmDeleteAccount()" class="delete-btn">
+      <mat-icon>delete</mat-icon>
+      <span>Delete Account</span>
+    </button>
+  </mat-menu>
+</div>
+
+<!-- Edit Profile Modal -->
+@if (showEditProfileModal) {
+  <div class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Edit Profile</h2>
+        <button class="close-btn" (click)="closeEditProfileModal()">&times;</button>
+      </div>
+      @if (editedUser) {
+        <div class="modal-body">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Name</mat-label>
+            <input matInput [(ngModel)]="editedUser.name" required>
+          </mat-form-field>
+          
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Email</mat-label>
+            <input matInput [(ngModel)]="editedUser.email" required type="email">
+          </mat-form-field>
+          
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Password</mat-label>
+            <input matInput [(ngModel)]="editedUser.password" type="password" placeholder="Leave blank to keep current password">
+          </mat-form-field>
+        </div>
+      }
+      <div class="modal-footer">
+        <button mat-button (click)="closeEditProfileModal()">Cancel</button>
+        <button mat-raised-button color="primary" (click)="saveUserChanges()">Save Changes</button>
+      </div>
+    </div>
+  </div>
+}
+
+<!-- My Courses Modal -->
+@if (showCoursesModal) {
+  <div class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>My Courses</h2>
+        <button class="close-btn" (click)="closeCoursesModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        @if (enrolledCourses.length === 0) {
+          <div class="no-courses">
+            <p>You are not enrolled in any courses yet.</p>
+          </div>
+        }
+        @if (enrolledCourses.length > 0) {
+          <div class="courses-list">
+            <mat-card *ngFor="let course of enrolledCourses" class="course-card">
+              <mat-card-header>
+                <mat-card-title>{{ course.title }}</mat-card-title>
+                <mat-card-subtitle>{{ course.description }}</mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-content>
+                <p><strong>Instructor:</strong> {{ course.teacherName || 'Unknown' }}</p>
+                <p><strong>Lessons:</strong> {{ course.lessons?.length || 0 }}</p>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        }
+      </div>
+      <div class="modal-footer">
+        <button mat-button (click)="closeCoursesModal()">Close</button>
+      </div>
+    </div>
+  </div>
+}

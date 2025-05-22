@@ -1,0 +1,209 @@
+<div class="management-container">
+  <mat-card class="management-header">
+    <mat-card-title>Course Management Interface</mat-card-title>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="openAddCourseModal()">
+        <mat-icon>add</mat-icon>
+        Add New Course
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+  <div *ngIf="courses.length > 0; else noCourses" class="courses-grid">
+    <mat-card *ngFor="let course of courses" class="course-card">
+      <mat-card-header>
+        <mat-card-title>{{ course.title }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ course.description }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-icon-button color="warn" (click)="course.id && deleteCourse(course.id)" matTooltip="Delete Course">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" (click)="course.id && openAddLessonModal(course.id)" matTooltip="Add Lesson">
+          <mat-icon>add_circle</mat-icon>
+        </button>
+        <button mat-icon-button color="accent" (click)="course.id && openEditCourseModal(course)" matTooltip="Update Course">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </mat-card-actions>
+
+      <mat-card-content class="lessons-section">
+        <h3>Course Lessons:</h3>
+        <table mat-table [dataSource]="course.lessons" *ngIf="course.lessons && course.lessons.length > 0">
+          <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef>Title</th>
+            <td mat-cell *matCellDef="let lesson">{{ lesson.title }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="content">
+            <th mat-header-cell *matHeaderCellDef>Content</th>
+            <td mat-cell *matCellDef="let lesson">{{ lesson.content }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let lesson">
+              <button mat-icon-button color="primary" (click)="openEditLessonModal(lesson, course.id)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="deleteLesson(course.id, lesson.id)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="['title', 'content', 'actions']"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['title', 'content', 'actions']"></tr>
+        </table>
+        <p *ngIf="!course.lessons || course.lessons.length === 0">No lessons available for this course.</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <ng-template #noCourses>
+    <mat-card class="no-courses-card">
+      <mat-card-content>
+        <p>No courses available at the moment.</p>
+      </mat-card-content>
+    </mat-card>
+  </ng-template>
+
+  <div *ngIf="showAddCourseModal" class="modal">
+    <mat-card class="modal-card">
+      <mat-card-header>
+        <mat-card-title>Add New Course</mat-card-title>
+        <button mat-icon-button class="close-button" (click)="closeAddCourseModal()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-card-header>
+      <mat-card-content>
+        <form (ngSubmit)="addCourse()">
+          <mat-form-field appearance="fill">
+            <mat-label>Title</mat-label>
+            <input matInput id="title" name="title" [(ngModel)]="newCourse.title" required>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Description</mat-label>
+            <textarea matInput id="description" name="description" [(ngModel)]="newCourse.description"></textarea>
+          </mat-form-field>
+
+          <button mat-raised-button color="primary" type="submit">Save</button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div *ngIf="showEditCourseModal && selectedCourse" class="modal">
+    <mat-card class="modal-card">
+      <mat-card-header>
+        <mat-card-title>Edit Course</mat-card-title>
+        <button mat-icon-button class="close-button" (click)="closeEditCourseModal()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-card-header>
+      <mat-card-content>
+        <form (ngSubmit)="updateCourse()" class="lesson-form">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Title</mat-label>
+            <input matInput id="title" name="title" [(ngModel)]="selectedCourse.title" required>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Description</mat-label>
+            <textarea matInput id="description" name="description" [(ngModel)]="selectedCourse.description" rows="6"></textarea>
+          </mat-form-field>
+
+          <div class="form-actions">
+            <button mat-raised-button color="primary" type="submit">Save</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div *ngIf="showAddLessonModal" class="modal">
+    <mat-card class="modal-card">
+      <mat-card-header>
+        <mat-card-title>Add New Lesson to Course {{ selectedCourseIdForLesson }}</mat-card-title>
+        <button mat-icon-button class="close-button" (click)="closeAddLessonModal()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-card-header>
+      <mat-card-content>
+        <form (ngSubmit)="addLesson()">
+          <mat-form-field appearance="fill">
+            <mat-label>Lesson Title</mat-label>
+            <input matInput id="title" name="title" [(ngModel)]="newLesson.title" required>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Lesson Content</mat-label>
+            <textarea matInput id="content" name="content" [(ngModel)]="newLesson.content"></textarea>
+          </mat-form-field>
+
+          <button mat-raised-button color="primary" type="submit">Save</button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div *ngIf="selectedCourseIdForLessons && showEditLessons" class="edit-lessons-container">
+    <h2>Manage Lessons for Course {{ selectedCourseIdForLessons }}</h2>
+    <table *ngIf="lessons.length > 0">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Content</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let lesson of lessons">
+          <td>{{ lesson.title }}</td>
+          <td>{{ lesson.content }}</td>
+          <td>
+            <button class="edit-button" (click)="openEditLessonModal(lesson, selectedCourseIdForLessons!)">Edit</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p *ngIf="lessons.length === 0">No lessons available for this course.</p>
+    <button class="back-button" (click)="closeEditLessons()">Back to Courses</button>
+  </div>
+
+  <div *ngIf="showEditLessonModal && selectedLesson" class="modal">
+    <mat-card class="modal-card">
+      <mat-card-header>
+        <mat-card-title>Edit Lesson</mat-card-title>
+        <button mat-icon-button class="close-button" (click)="closeEditLessonModal()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-card-header>
+      <mat-card-content>
+        <form (ngSubmit)="updateLesson()" class="lesson-form">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Lesson Title</mat-label>
+            <input matInput id="title" name="title" [(ngModel)]="selectedLesson.title" required>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Lesson Content</mat-label>
+            <textarea matInput id="content" name="content" [(ngModel)]="selectedLesson.content" rows="6"></textarea>
+          </mat-form-field>
+
+          <div class="form-actions">
+            <button mat-raised-button color="primary" type="submit">Save</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<!-- Floating action button for adding a new course when scrolled down -->
+<button mat-fab class="fab-add-button" (click)="openAddCourseModal()" *ngIf="showFloatingButton">
+  <mat-icon>add</mat-icon>
+</button>

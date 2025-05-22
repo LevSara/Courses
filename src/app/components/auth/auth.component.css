@@ -1,0 +1,36 @@
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+    background: linear-gradient(135deg, #2b1055, #7597de);
+  }
+  
+  .auth-card {
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    background-color: white;
+  }
+  
+  .full-width {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  
+  .toggle-btn {
+    margin-top: 10px;
+    display: block;
+    text-align: center;
+    width: 100%;
+  }
+  
+  .error-message {
+    color: red;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-align: center;
+  }
+  

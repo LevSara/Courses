@@ -1,0 +1,91 @@
+<div class="auth-container">
+  <mat-card class="auth-card">
+    <h2>{{ isLoginMode ? 'Login to Your Account' : 'Register New Account' }}</h2>
+
+    <form [formGroup]="isLoginMode ? authForm : registerForm" (ngSubmit)="onSubmit()">
+      
+      <!-- Name Field (Only in Register Mode) -->
+      @if (!isLoginMode) {
+        <div>
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" placeholder="Enter your full name" required />
+            @if (registerForm.get('name')?.hasError('required')) {
+              <mat-error>
+                Name is required.
+              </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      }
+
+      <!-- Email Field -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" placeholder="Enter email" required />
+        @if ((isLoginMode ? authForm : registerForm).get('email')?.hasError('required')) {
+          <mat-error>
+            Email is required.
+          </mat-error>
+        }
+        @if ((isLoginMode ? authForm : registerForm).get('email')?.hasError('email')) {
+          <mat-error>
+            Invalid email format.
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Password Field -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" placeholder="Enter password" required />
+        @if ((isLoginMode ? authForm : registerForm).get('password')?.hasError('required')) {
+          <mat-error>
+            Password is required.
+          </mat-error>
+        }
+        @if ((isLoginMode ? authForm : registerForm).get('password')?.hasError('minlength')) {
+          <mat-error>
+            Password must be at least 6 characters.
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Role Selector (Only in Register Mode) -->
+      @if (!isLoginMode) {
+        <div>
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Select Role</mat-label>
+            <mat-select formControlName="role" required>
+              <mat-option value="student">Student</mat-option>
+              <mat-option value="teacher">Teacher</mat-option>
+              <mat-option value="admin">Admin</mat-option>
+            </mat-select>
+            @if (registerForm.get('role')?.hasError('required')) {
+              <mat-error>
+                Role is required.
+              </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      }
+
+      <!-- Error Display -->
+      @if (error) {
+        <div class="error-message">
+          {{ error }}
+        </div>
+      }
+
+      <!-- Submit Button -->
+      <button mat-raised-button color="primary" [disabled]="loading" type="submit" class="full-width">
+        {{ isLoginMode ? 'Login' : 'Register' }}
+      </button>
+
+      <!-- Toggle Button -->
+      <button mat-button type="button" (click)="toggleMode()" class="toggle-btn">
+        {{ isLoginMode ? 'Don\'t have an account? Register' : 'Already have an account? Login' }}
+      </button>
+    </form>
+  </mat-card>
+</div>

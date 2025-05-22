@@ -1,0 +1,80 @@
+<!-- Previous code has been removed and replaced with Angular 19 control flow syntax -->
+
+<div class="courses-container">
+  <mat-card class="courses-header">
+    <div class="header-content">
+      <div class="header-text">
+        <mat-card-title>Available Courses</mat-card-title>
+        <mat-card-subtitle>Explore our programming courses</mat-card-subtitle>
+      </div>
+    </div>
+  </mat-card>
+
+  <div class="courses-grid">
+    @for (course of courses; track course.id; let i = $index) {
+      <mat-card class="course-card">
+        <img 
+          mat-card-image 
+          [src]="'assets/images/' + getCourseImage(i)" 
+          [alt]="course.title"
+        />
+        <mat-card-header>
+          <mat-card-title>{{ course.title }}</mat-card-title>
+          <mat-card-subtitle>Teacher: {{ course.teacherName || 'Unknown' }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ course.description }}</p>
+        </mat-card-content>
+        <mat-card-actions align="end">
+          <button
+            mat-stroked-button
+            color="accent"
+            (click)="openCourseDetails(course.id)"
+          >
+            <mat-icon>info</mat-icon> Details
+          </button>
+
+          <!-- Enroll/Unenroll buttons for all users -->
+          @if (!isEnrolled(course.id)) {
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="enrollInCourse(course.id)"
+              [disabled]="isEnrolled(course.id)"
+              class="enroll-button"
+            >
+              <mat-icon>add</mat-icon> Enroll
+            </button>
+          }
+          @if (isEnrolled(course.id)) {
+            <button
+              mat-raised-button
+              color="warn"
+              (click)="unenrollFromCourse(course.id)"
+              class="unenroll-button"
+            >
+              <mat-icon>cancel</mat-icon> Unenroll
+            </button>
+            <mat-icon
+              color="accent"
+              matTooltip="You are enrolled in this course"
+              class="enrolled-icon"
+            >check_circle</mat-icon>
+          }
+
+          <!-- Teacher/Admin actions commented out for now -->
+          <!-- @if (userRole === 'teacher' || userRole === 'admin') {
+            <button
+              mat-icon-button
+              color="primary"
+              (click)="editCourse(course.id)"
+              aria-label="Edit Course"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+          } -->
+        </mat-card-actions>
+      </mat-card>
+    }
+  </div>
+</div>

@@ -1,0 +1,445 @@
+.courses-container {
+  min-height: 90vh;
+  padding: 2rem;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: linear-gradient(135deg, #2b1055, #7597de);
+}
+
+.courses-header {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  width: 100%;
+}
+
+.header-content {
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(124, 77, 255, 0.1), rgba(68, 138, 255, 0.1));
+}
+
+.header-text {
+  text-align: center;
+}
+
+.header-text mat-card-title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.5px;
+}
+
+.header-text mat-card-subtitle {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin: 1rem;
+  padding: 0.5rem;
+}
+
+.course-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 1rem;
+  margin: 0.25rem;
+  overflow: hidden;
+}
+
+.course-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.course-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.course-card:hover img {
+  transform: scale(1.05);
+}
+
+
+
+.course-card mat-card-content {
+  flex-grow: 1;
+  padding: 1rem;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.course-card mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 8px 16px;
+  gap: 8px;
+}
+
+.enroll-button, .unenroll-button {
+  margin-left: 8px;
+}
+
+.enrolled-icon {
+  margin-left: 8px;
+}
+
+button[mat-raised-button] {
+  background: linear-gradient(135deg, #7c4dff, #448aff);
+  color: white;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 25px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button[mat-raised-button]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(124, 77, 255, 0.4);
+}
+
+button[mat-stroked-button] {
+  border: 1px solid rgba(124, 77, 255, 0.5);
+  color: #7c4dff;
+  border-radius: 25px;
+  transition: all 0.2s ease;
+}
+
+button[mat-stroked-button]:hover {
+  background: rgba(124, 77, 255, 0.1);
+  border-color: #7c4dff;
+}
+
+mat-icon {
+  margin-right: 4px;
+}
+
+
+@media (max-width: 960px) {
+  .courses-container {
+    justify-content: center;
+  }
+  .course-card {
+    width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 600px) {
+  .course-card {
+    width: 100%;
+  }
+}
+
+
+
+
+
+
+
+.mat-stroked-button.mat-accent-custom {
+  color: #7c4dff;
+  border-color: #7c4dff;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.mat-stroked-button.mat-accent-custom:hover {
+  background-color: rgba(124, 77, 255, 0.1);
+}
+
+.mat-raised-button.mat-primary-custom {
+  background-color: #3f51b5;
+  color: white;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.mat-raised-button.mat-primary-custom:hover {
+  background-color: #303f9f;
+}
+
+.mat-raised-button.mat-warn-custom {
+  background-color: #9c27b0;
+  color: white;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.mat-raised-button.mat-warn-custom:hover {
+  background-color: #7b1fa2;
+}
+
+.mat-icon.mat-accent-custom {
+  color: #7c4dff;
+}
+
+.courses-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 20px;
+  padding: 20px;
+}
+
+.courses-title {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.course-card {
+  width: calc(33% - 20px);
+  min-width: 300px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex; /* כדי לסדר את התוכן בצורה גמישה */
+  flex-direction: column; /* סדר את התוכן מלמעלה למטה */
+}
+
+.course-card img {
+  width: 100%;
+  height: auto; /* שמור על יחס הגובה-רוחב */
+  display: block; /* הסר מרווחים מיותרים מתחת לתמונה */
+}
+
+.course-card-header {
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #eee;
+  padding: 16px;
+}
+
+.course-card-title {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.course-card-subtitle {
+  font-size: 0.9em;
+  color: #777;
+}
+
+.course-card-content {
+  padding: 16px;
+  color: #555;
+  flex-grow: 1; /* אפשר לתוכן לגדול ולתפוס מקום */
+}
+
+.course-card-actions {
+  padding: 16px;
+}
+
+/* צבעים מותאמים לכפתורים - גוונים של כחול */
+.mat-stroked-button.mat-accent-custom {
+  color: #1e88e5; /* גוון כחול בהיר יותר */
+  border-color: #1e88e5;
+}
+
+.mat-raised-button.mat-primary-custom {
+  background-color: #1976d2; /* גוון כחול ראשי */
+  color: white;
+}
+
+.mat-raised-button.mat-warn-custom {
+  background-color: #303f9f; /* גוון כחול כהה יותר */
+  color: white;
+}
+
+.mat-icon.mat-accent-custom {
+  color: #1e88e5;
+}
+
+/* התאמה למסכים קטנים יותר */
+@media (max-width: 960px) {
+  .courses-container {
+    justify-content: center;
+  }
+  .course-card {
+    width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 600px) {
+  .course-card {
+    width: 100%;
+  }
+}
+/* ... שאר ה-CSS ... */
+
+/* עיצוב כפתורים עדכני ועתידני */
+.mat-stroked-button.mat-accent-custom {
+  color: #7c4dff; /* גוון סגול בהיר */
+  border-color: #7c4dff;
+  border-radius: 4px; /* פחות מעוגל */
+  padding: 8px 16px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.mat-stroked-button.mat-accent-custom:hover {
+  background-color: rgba(124, 77, 255, 0.1); /* אפקט ריחוף קל */
+}
+
+.mat-raised-button.mat-primary-custom {
+  background-color: #3f51b5; /* גוון כחול ראשי */
+  color: white;
+  border-radius: 4px; /* פחות מעוגל */
+  padding: 10px 20px;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.mat-raised-button.mat-primary-custom:hover {
+  background-color: #303f9f; /* גוון כחול כהה יותר בריחוף */
+}
+
+.mat-raised-button.mat-warn-custom {
+  background-color: #9c27b0; /* גוון סגול ראשי */
+  color: white;
+  border-radius: 4px; /* פחות מעוגל */
+  padding: 10px 20px;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.mat-raised-button.mat-warn-custom:hover {
+  background-color: #7b1fa2; /* גוון סגול כהה יותר בריחוף */
+}
+
+.mat-icon.mat-accent-custom {
+  color: #7c4dff;
+}
+/* ... שאר ה-CSS ... */
+
+.course-card {
+  width: calc(33% - 20px);
+  min-width: 300px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* מרכוז אופקי של כל התוכן בתוך הכרטיס */
+  text-align: center; /* מרכוז טקסט ברירת מחדל */
+}
+
+.course-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 10px; /* הוספת מרווח קטן מתחת לתמונה */
+}
+
+.course-card-header {
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #eee;
+  padding: 16px;
+  width: 100%; /* וודא שהכותרת תופסת את כל הרוחב כדי שהטקסט יתמרכז */
+}
+
+.course-card-title {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #673ab7; /* גוון סגול לכותרת */
+}
+
+.course-card-subtitle {
+  font-size: 0.9em;
+  color: #3f51b5; /* גוון כחול לתת-כותרת */
+}
+
+.course-card-content {
+  padding: 16px;
+  color: #555;
+  flex-grow: 1;
+  width: 100%; /* וודא שהתוכן תופס את כל הרוחב כדי שהטקסט יתמרכז */
+}
+
+.course-card-content p {
+  color: #7e57c2; /* גוון סגול לתיאור הקורס */
+}
+
+.course-card-actions {
+  padding: 16px;
+  display: flex; /* השתמש ב-Flexbox כדי למרכז את הכפתורים */
+  justify-content: center; /* מרכוז אופקי של הכפתורים */
+  width: 100%; /* וודא שאזור הפעולות תופס את כל הרוחב */
+}
+
+/* עיצוב כפתורים עדכני ועתידני - ללא שינוי מהעיצוב הקודם */
+.mat-stroked-button.mat-accent-custom {
+  color: #7c4dff;
+  border-color: #7c4dff;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.mat-stroked-button.mat-accent-custom:hover {
+  background-color: rgba(124, 77, 255, 0.1);
+}
+
+.mat-raised-button.mat-primary-custom {
+  background-color: #3f51b5;
+  color: white;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.mat-raised-button.mat-primary-custom:hover {
+  background-color: #303f9f;
+}
+
+.mat-raised-button.mat-warn-custom {
+  background-color: #9c27b0;
+  color: white;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.mat-raised-button.mat-warn-custom:hover {
+  background-color: #7b1fa2;
+}
+
+.mat-icon.mat-accent-custom {
+  color: #7c4dff;
+}

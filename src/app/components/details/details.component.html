@@ -1,0 +1,93 @@
+@if (!loading) {
+  <mat-card class="details-card">
+    <!-- Course Image Banner - smaller height -->
+    <div class="course-image-container">
+      <img [src]="'assets/images/' + getCourseImage(courseId)" alt="Course Image" class="course-image">
+      <div class="course-image-overlay">
+        @if (!isEditing) {
+          <mat-card-title class="course-title">{{ title }}</mat-card-title>
+        }
+        @if (isEditing) {
+          <mat-form-field appearance="outline" class="full-width edit-title">
+            <mat-label>Course Name</mat-label>
+            <input matInput [(ngModel)]="title" />
+          </mat-form-field>
+        }
+        @if (teacherName) {
+          <mat-card-subtitle class="teacher-name">Teacher: {{ teacherName }}</mat-card-subtitle>
+        }
+      </div>
+    </div>
+
+    <mat-card-content class="course-content">
+      <!-- Course Description - more compact -->
+      <section class="course-description">
+        <h3 class="section-title">Course Description</h3>
+        @if (!isEditing) {
+          <p class="description-text">{{ description }}</p>
+        }
+        @if (isEditing) {
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Description</mat-label>
+            <textarea matInput rows="2" [(ngModel)]="description"></textarea>
+          </mat-form-field>
+        }
+      </section>
+
+      <!-- Course Lessons - more compact -->
+      <section class="course-lessons">
+        <h3 class="section-title">Course Lessons</h3>
+        <mat-list class="compact-list">
+          <mat-list-item *ngFor="let lesson of lessons; let i = index" class="lesson-item">
+            <div matListItemTitle class="lesson-title">
+              {{ lesson.title }}
+            </div>
+            <div matListItemLine class="lesson-content">{{ lesson.content }}</div>
+          </mat-list-item>
+        </mat-list>
+        @if (lessons?.length === 0) {
+          <p class="no-lessons">No lessons available for this course yet.</p>
+        }
+      </section>
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+      @if (!isEditing && isTeacher) {
+        <button mat-button color="primary" (click)="toggleEdit()">
+          <mat-icon>edit</mat-icon> ערוך
+        </button>
+      }
+      <button mat-icon-button (click)="dialogRef.close()">
+        <mat-icon>close</mat-icon>
+      </button>
+
+      <!-- Explanation: This button is commented out for now, but you can enable it for save functionality. -->
+      <!--
+      @if (isEditing) {
+        <button mat-button color="primary" (click)="saveChanges()">
+          <mat-icon>save</mat-icon> שמור
+        </button>
+      }
+      -->
+      @if (isEditing) {
+        <button mat-button color="warn" (click)="cancel()">
+          <mat-icon>cancel</mat-icon> בטל
+        </button>
+      }
+    </mat-card-actions>
+  </mat-card>
+}
+
+<!-- סיבוב טוען -->
+@if (loading) {
+  <div class="loading-container">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+}
+
+<!-- הודעת שגיאה -->
+@if (error) {
+  <div class="error-message">
+    {{ error }}
+  </div>
+}

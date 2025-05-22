@@ -1,0 +1,214 @@
+<div class="admin-container">
+  <!-- Header section -->
+  <mat-card class="admin-header">
+    <div class="header-content">
+      <div class="header-text">
+        <mat-card-title class="admin-title">User Management</mat-card-title>
+        <mat-card-subtitle>Admin Panel</mat-card-subtitle>
+      </div>
+      <div class="header-actions">
+        <button mat-raised-button color="primary" (click)="openAddUserModal()">
+          <mat-icon>add</mat-icon>
+          Add New User
+        </button>
+        <!-- Admin actions -->
+        <button mat-raised-button color="accent" (click)="showTeacherLoginModal = true">
+          <mat-icon>school</mat-icon>
+          Teacher Portal
+        </button>
+      </div>
+    </div>
+  </mat-card>
+
+  <!-- Users table -->
+  <div class="table-container">
+    <table mat-table [dataSource]="users" class="user-table">
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let user">{{ user.id }}</td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let user">{{ user.name }}</td>
+      </ng-container>
+
+      <!-- Email Column -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let user">{{ user.email }}</td>
+      </ng-container>
+
+      <!-- Role Column -->
+      <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef>Role</th>
+        <td mat-cell *matCellDef="let user">
+          <span class="role-badge" [ngClass]="user.role">
+            {{ user.role | titlecase }}
+          </span>
+        </td>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let user">
+          <button mat-icon-button color="primary" (click)="openEditUserModal(user)" matTooltip="Edit User">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteUser(user.id!)" matTooltip="Delete User">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="userColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: userColumns;"></tr>
+    </table>
+
+    <!-- No users message -->
+    @if (users.length === 0) {
+    <div class="no-users-message">
+      <p>No users found. Add a new user to get started.</p>
+    </div>
+    }
+
+    <!-- Edit User Modal -->
+    @if (showEditUserModal && selectedUser) {
+    <div class="modal">
+      <mat-card class="modal-card">
+        <mat-card-header>
+          <mat-card-title>Edit User</mat-card-title>
+          <button mat-icon-button class="close-button" (click)="closeEditUserModal()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-card-header>
+        <mat-card-content>
+          <form (ngSubmit)="updateUser()" class="user-form">
+            <mat-form-field appearance="fill">
+              <mat-label>Name</mat-label>
+              <input matInput [(ngModel)]="selectedUser.name" name="name" required>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Email</mat-label>
+              <input matInput [(ngModel)]="selectedUser.email" name="email" type="email" required>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Role</mat-label>
+              <mat-select [(ngModel)]="selectedUser.role" name="role" required>
+                <mat-option value="admin">Admin</mat-option>
+                <mat-option value="teacher">Teacher</mat-option>
+                <mat-option value="student">Student</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <div class="form-actions">
+              <button mat-raised-button color="primary" type="submit">Save Changes</button>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    }>
+
+    @if (showAddUserModal) {
+    <div class="modal">
+      <mat-card class="modal-card">
+        <mat-card-header>
+          <mat-card-title>Add New User</mat-card-title>
+          <button mat-icon-button class="close-button" (click)="closeAddUserModal()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-card-header>
+        <mat-card-content>
+          <form (ngSubmit)="addUser()" class="user-form">
+            <mat-form-field appearance="fill">
+              <mat-label>Name</mat-label>
+              <input matInput [(ngModel)]="newUser.name" name="name" required>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Email</mat-label>
+              <input matInput [(ngModel)]="newUser.email" name="email" type="email" required>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Password</mat-label>
+              <input matInput [(ngModel)]="newUser.password" name="password" type="password" required>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Role</mat-label>
+              <mat-select [(ngModel)]="newUser.role" name="role" required>
+                <mat-option value="admin">Admin</mat-option>
+                <mat-option value="teacher">Teacher</mat-option>
+                <mat-option value="student">Student</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <div class="form-actions">
+              <button mat-raised-button color="primary" type="submit">Add User</button>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    }
+
+    <!-- Teacher Login Modal -->
+  @if (showTeacherLoginModal) {
+  <div class="modal">
+    <mat-card class="modal-card teacher-login-card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon class="teacher-icon">school</mat-icon>
+          Teacher Portal
+        </mat-card-title>
+        <button mat-icon-button class="close-button" (click)="showTeacherLoginModal = false">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-card-header>
+      <mat-card-content>
+        <p class="teacher-login-info">Login with your teacher credentials to access course management features.</p>
+        <form (ngSubmit)="loginAsTeacher()" #teacherLoginForm="ngForm" class="teacher-login-form">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Email</mat-label>
+            <mat-icon matPrefix>email</mat-icon>
+            <input matInput type="email" name="email" [(ngModel)]="teacherCredentials.email" required>
+          </mat-form-field>
+          
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Password</mat-label>
+            <mat-icon matPrefix>lock</mat-icon>
+            <input matInput type="password" name="password" [(ngModel)]="teacherCredentials.password" required>
+          </mat-form-field>
+          
+          @if (teacherLoginError) {
+            <div class="error-message">
+              <mat-icon>error</mat-icon>
+              {{ teacherLoginError }}
+            </div>
+          }
+          
+          <div class="form-actions">
+            <button mat-raised-button color="primary" type="submit" [disabled]="teacherLoginForm.invalid || isLoading" class="login-button">
+              <mat-icon>{{ isLoading ? 'hourglass_empty' : 'login' }}</mat-icon>
+              {{ isLoading ? 'Logging in...' : 'Login as Teacher' }}
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+}
+    <!-- Floating action button for adding a new user when scrolled down -->
+     @if(showFloatingButton) {
+    <button mat-fab class="fab-add-button" (click)="openAddUserModal()" *ngIf="showFloatingButton">
+      <mat-icon>add</mat-icon>
+    </button>
+  }
+  </div>
