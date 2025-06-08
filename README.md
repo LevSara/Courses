@@ -1,4 +1,4 @@
-![צילום מסך של הפרויקט](images/צילום%20מסך%202025-05-29%20134056.png)
+![צילום מסך של הפרויקט](צילום%20מסך%202025-05-29%20134056.png)
 # Courses
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.9.
